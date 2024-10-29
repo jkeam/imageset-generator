@@ -50,6 +50,10 @@ storageConfig:
     skipTLS: true
 ```
 
+## Out of Scope
+
+1. Anything other than linux/amd64
+
 ## Docs
 1. [Release](https://mirror.openshift.com/pub/openshift-v4/clients/ocp/4.16.18/release.txt)
 2. [Unfortunately, that initial release of this feature in 4.15.0 and the above-mentioned versions had a critical flaw (ref OCPBUGS-33305) which wasn't resolved until the 4.15.13 release of oc-mirror.](https://access.redhat.com/solutions/7013461)

@@ -42,9 +42,17 @@ func resetDatabase(db *gorm.DB) {
 func createFakeData(db *gorm.DB) {
 	db.Create(&Version{Name: "4.17"})
 
+	// Versions
 	var version Version
 	db.First(&version, "name = ?", "4.17")
 
+	// Releases
 	db.Create(&Release{Name: "4.17.0", VersionID: version.ID, PullSpec: "quay.io/openshift-release-dev/ocp-release@sha256:fbad931c725b2e5b937b295b58345334322bdabb0b67da1c800a53686d7397da"})
 	db.Create(&Release{Name: "4.17.1", VersionID: version.ID, PullSpec: "quay.io/openshift-release-dev/ocp-release@sha256:e16ac60ac6971e5b6f89c1d818f5ae711c0d63ad6a6a26ffe795c738e8cc4dde"})
+
+	// Catalogs
+	db.Create(&Catalogs{Name: "registry.redhat.io/redhat/redhat-operator-index:v4.17", VersionID: version.ID})
+	db.Create(&Catalogs{Name: "registry.redhat.io/redhat/certified-operator-index:v4.17", VersionID: version.ID})
+	db.Create(&Catalogs{Name: "registry.redhat.io/redhat/community-operator-index:v4.17", VersionID: version.ID})
+	db.Create(&Catalogs{Name: "registry.redhat.io/redhat/redhat-marketplace-index:v4.17", VersionID: version.ID})
 }
