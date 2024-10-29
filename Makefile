@@ -13,3 +13,7 @@ run:
 .PHONY: clean
 clean:
 	rm -rf ./imageset-generator ./imageset-generator-macos
+
+.PHONE: format
+format:
+	go fmt ./...

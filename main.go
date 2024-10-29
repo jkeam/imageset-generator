@@ -6,9 +6,9 @@ import (
 	"log/slog"
 
 	"github.com/gin-gonic/gin"
+	"github.com/jkeam/imageset-generator/lib"
+	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
-  "gorm.io/driver/postgres"
-  "github.com/jkeam/imageset-generator/lib"
 )
 
 var db *gorm.DB
@@ -17,18 +17,18 @@ func main() {
 	var err error
 	dsn := "host=localhost user=postgres password=adminpassword dbname=imageset port=5432 sslmode=disable TimeZone=America/New_York"
 	db, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
-  if err != nil {
+	if err != nil {
 		log.Fatal(err)
-    panic("failed to connect database")
-  }
+		panic("failed to connect database")
+	}
 
-  migrateFlag := flag.Bool("migrate", false, "migrate boolean")
-  flag.Parse()
-  if *migrateFlag {
-  	lib.Migrate(db)
-    slog.Info("Database migrated")
-  	return
-  }
+	migrateFlag := flag.Bool("migrate", false, "migrate boolean")
+	flag.Parse()
+	if *migrateFlag {
+		lib.Migrate(db)
+		slog.Info("Database migrated")
+		return
+	}
 
 	router := gin.Default()
 	router.GET("/versions", getVersions)
