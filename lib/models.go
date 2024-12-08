@@ -8,8 +8,16 @@ import (
 type Version struct {
 	gorm.Model
 	Name     string
-	Releases []Release `json:"-"`
+	Channels []Channel `json:"-"`
 	Catalogs []Catalog `json:"-"`
+}
+
+// name: stable-4.17
+type Channel struct {
+	gorm.Model
+	Name      string
+	VersionID uint
+	Releases []Release `json:"-"`
 }
 
 // name: 4.17.1
@@ -18,7 +26,7 @@ type Release struct {
 	gorm.Model
 	Name      string
 	PullSpec  string
-	VersionID uint
+	ChannelID uint
 	Images    []Image `json:"-"`
 }
 
@@ -36,7 +44,7 @@ type Catalog struct {
 	gorm.Model
 	Name      string
 	VersionID uint
-	Operators []Operator
+	Operators []Operator `json:"-"`
 }
 
 // name: cluster-logging
