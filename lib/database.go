@@ -20,7 +20,6 @@ func Migrate(db *gorm.DB) {
 	// var count int64
 	// db.Model(&Version{}).Where("name = ?", "4.17").Count(&count)
 	// log.Println("count: ", count)
-
 }
 
 func resetDatabase(db *gorm.DB) {
@@ -51,8 +50,8 @@ func createFakeData(db *gorm.DB) {
 	db.Create(&Release{Name: "4.17.1", VersionID: version.ID, PullSpec: "quay.io/openshift-release-dev/ocp-release@sha256:e16ac60ac6971e5b6f89c1d818f5ae711c0d63ad6a6a26ffe795c738e8cc4dde"})
 
 	// Catalogs
-	db.Create(&Catalogs{Name: "registry.redhat.io/redhat/redhat-operator-index:v4.17", VersionID: version.ID})
-	db.Create(&Catalogs{Name: "registry.redhat.io/redhat/certified-operator-index:v4.17", VersionID: version.ID})
-	db.Create(&Catalogs{Name: "registry.redhat.io/redhat/community-operator-index:v4.17", VersionID: version.ID})
-	db.Create(&Catalogs{Name: "registry.redhat.io/redhat/redhat-marketplace-index:v4.17", VersionID: version.ID})
+	db.Create(&Catalog{Name: "registry.redhat.io/redhat/redhat-operator-index:v4.17", VersionID: version.ID})
+	db.Create(&Catalog{Name: "registry.redhat.io/redhat/certified-operator-index:v4.17", VersionID: version.ID})
+	db.Create(&Catalog{Name: "registry.redhat.io/redhat/community-operator-index:v4.17", VersionID: version.ID})
+	db.Create(&Catalog{Name: "registry.redhat.io/redhat/redhat-marketplace-index:v4.17", VersionID: version.ID})
 }
